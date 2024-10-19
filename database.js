@@ -7,11 +7,7 @@ dotenv.config(); // Load environment variables
 
 const router = express.Router();
 const db = new pg.Client({
-    user: "birukee",
-    database: "Blog",
-    password: "new_password",
-    port: 5432
-    
+    connectionString: process.env.DATABASE_URL, // Use the DATABASE_URL from .env
 });
 
 // Connect to the database

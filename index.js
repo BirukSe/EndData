@@ -20,7 +20,7 @@ app.use(router);
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "https://messenger-jade-beta.vercel.app/", // Make sure to use the correct protocol
+        origin: "https://messenger-teal-chi.vercel.app/", // Make sure to use the correct protocol
         methods: ["GET", "POST"],
     }
 });
