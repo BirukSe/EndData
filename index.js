@@ -20,7 +20,7 @@ app.use(router);
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "https://messenger-teal-chi.vercel.app/", // Make sure to use the correct protocol
+        origin: "https://messenger-teal-chi.vercel.app", // Make sure to use the correct protocol
         methods: ["GET", "POST"],
     }
 });
@@ -53,6 +53,16 @@ io.on("connection", (socket) => {
         socket.to(data.room).emit("receive_message", data); // For group messages
     });
 
+    // socket.on("send_private_message", (data) => {
+    //     console.log("Attempting to send private message to:", data.recipient);
+    //     const recipientSocketId = users[data.recipient];
+    //     if (recipientSocketId) {
+    //         io.to(recipientSocketId).emit("receive_private_message", data);
+    //         console.log("Message sent to:", data.recipient);
+    //     } else {
+    //         console.log(`User ${data.recipient} not found. Current users:`, users);
+    //     }
+    // });
     socket.on("send_private_message", (data) => {
         console.log("Attempting to send private message to:", data.recipient);
         const recipientSocketId = users[data.recipient];
@@ -63,6 +73,7 @@ io.on("connection", (socket) => {
             console.log(`User ${data.recipient} not found. Current users:`, users);
         }
     });
+    
 
     socket.on("disconnect", () => {
         console.log(`User: ${socket.id} disconnected`);
